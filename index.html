@@ -17,13 +17,19 @@ crossorigin="anonymous">
         <h1>{{sitename}}</h1>
     </div>
     <div class="nav navbar-nav navbar-right cart">
+        <button type="button"
+            class="btn btn-default btn-lg"
+            v-on:click="showCheckout">
         <span
-            class="glyphicon glyphicon-shopping cart">
+            class="glyphicon glyphicon-shopping-cart">
             {{cartItemCount}}</span>
+            Checkout
+        </button>
     </div>
     </header>
     <main>
-    <div class="row">
+    <div class="row product">
+        <div v-if="showProduct">
         <div class="col-md-2 col-md-offset-1">
         <figure>
             <img v-bind:src="product.image">
@@ -43,8 +49,13 @@ crossorigin="anonymous">
         </div>
 
     </div>
+    <div v-else>
 
-    </main>
+
+    </div>
+    </div><!--End of row-->
+
+    </main> <!--End main-->
 
 </div> 
 </body>
@@ -55,6 +66,7 @@ crossorigin="anonymous">
     el: '#app',
     data: {
         sitename: "Vue.js Pet Depot",
+        showProduct: true,
         product: {
         id: 1001,
         title: "Cat Food, 25lb bag",
@@ -86,6 +98,10 @@ crossorigin="anonymous">
     methods: {
         addToCart: function() {
             this.cart.push(this.product.id);
+        },
+        showCheckout() {
+            this.showProduct = this.showProduct ? false : true;
+
         }
     },
     computed: {
